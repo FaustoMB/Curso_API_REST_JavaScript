@@ -1,9 +1,9 @@
+const API_URL_RANDOM = "https://api.thecatapi.com/v1/images/search?limit=2";
+const API_URL_FAVORITES = "https://api.thecatapi.com/v1/favourites/";
+const API_URL_FAVORITES_DELETE = (id)  => `https://api.thecatapi.com/v1/favourites/${id}?api_key=live_TQm4B9BJPOqRCtyTg0AfFmAduA9AIi8mVtjyja4oWg0gYuz8f6QJTePk7dwI17MB`;
 const button = document.getElementById('reload');
 const btn1 = document.getElementById('btn1');
 const btn2 = document.getElementById('btn2');
-const API_URL_RANDOM = "https://api.thecatapi.com/v1/images/search?limit=2&api_key=live_TQm4B9BJPOqRCtyTg0AfFmAduA9AIi8mVtjyja4oWg0gYuz8f6QJTePk7dwI17MB";
-const API_URL_FAVORITES = "https://api.thecatapi.com/v1/favourites?api_key=live_TQm4B9BJPOqRCtyTg0AfFmAduA9AIi8mVtjyja4oWg0gYuz8f6QJTePk7dwI17MB";
-const API_URL_FAVORITES_DELETE = (id)  => `https://api.thecatapi.com/v1/favourites/${id}?api_key=live_TQm4B9BJPOqRCtyTg0AfFmAduA9AIi8mVtjyja4oWg0gYuz8f6QJTePk7dwI17MB`;
 const spanError = document.getElementById('error');
 
 
@@ -32,7 +32,12 @@ async function loadRandomCats(){
 }
 
 async function loadFavoriteCats(){
-    const res = await fetch(API_URL_FAVORITES);
+    const res = await fetch(API_URL_FAVORITES,{
+        method: 'GET',
+        headers:  {
+            'x-api-key' : 'live_TQm4B9BJPOqRCtyTg0AfFmAduA9AIi8mVtjyja4oWg0gYuz8f6QJTePk7dwI17MB'
+        }
+    });
     const data = await res.json();
     console.log('Favorites');
     console.log(data);
@@ -72,6 +77,7 @@ async function saveFavoriteCat(id){
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json',
+            'x-api-key' : 'live_TQm4B9BJPOqRCtyTg0AfFmAduA9AIi8mVtjyja4oWg0gYuz8f6QJTePk7dwI17MB'
         },
         body: JSON.stringify({
             image_id: id
@@ -94,6 +100,9 @@ async function saveFavoriteCat(id){
 async function deleteFavoriteCat (id){
     const res = await fetch(API_URL_FAVORITES_DELETE(id),{
         method: 'DELETE',   
+        headers:  {
+            'x-api-key' : 'live_TQm4B9BJPOqRCtyTg0AfFmAduA9AIi8mVtjyja4oWg0gYuz8f6QJTePk7dwI17MB'
+        }
     });
 
     if (res.status !== 200){
