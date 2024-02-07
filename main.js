@@ -33,7 +33,7 @@ async function loadFavoriteCats(){
         spanError.innerText = "Hubo un error: " + res.status;
     }
 
-
+}
 
 loadRandomCats();
 loadFavoriteCats();
