@@ -1,5 +1,5 @@
 const button = document.getElementById('reload');
-const URL = "https://api.thecatapi.com/v1/images/search?limit=3"
+const URL = "https://api.thecatapi.com/v1/images/search?limit=3&api_key=live_TQm4B9BJPOqRCtyTg0AfFmAduA9AIi8mVtjyja4oWg0gYuz8f6QJTePk7dwI17MB"
 
 button.addEventListener('click',fetchData)
 
