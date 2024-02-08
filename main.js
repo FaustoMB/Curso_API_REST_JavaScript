@@ -1,5 +1,6 @@
 const API_URL_RANDOM = "https://api.thecatapi.com/v1/images/search?limit=2";
 const API_URL_FAVORITES = "https://api.thecatapi.com/v1/favourites/";
+const API_URL_UPLOAD = "https://api.thecatapi.com/v1/images/upload";
 const API_URL_FAVORITES_DELETE = (id)  => `https://api.thecatapi.com/v1/favourites/${id}?api_key=live_TQm4B9BJPOqRCtyTg0AfFmAduA9AIi8mVtjyja4oWg0gYuz8f6QJTePk7dwI17MB`;
 const button = document.getElementById('reload');
 const btn1 = document.getElementById('btn1');
@@ -110,6 +111,33 @@ async function deleteFavoriteCat (id){
     } else {
         console.log('Eliminado en Favoritos')
         loadFavoriteCats();
+    }
+
+}
+
+async function uploadCatPhoto (){
+    const form = document.getElementById('uploadingForm');
+    const formData = new FormData(form);
+
+    console.log(formData.get('file'))
+
+    const res = await fetch(API_URL_UPLOAD,{
+        method: 'POST',
+        headers: {
+            'x-api-key' : 'live_TQm4B9BJPOqRCtyTg0AfFmAduA9AIi8mVtjyja4oWg0gYuz8f6QJTePk7dwI17MB',
+            // 'Content-Type' : 'multipart/form-data'
+        },
+        body: formData
+
+    })
+
+    const data = await res.json();
+
+    if (res.status !== 201){
+        spanError.innerText = "Hubo un error: " + res.status + data.message;
+    } else {
+        console.log('Eliminado en Favoritos')
+        saveFavoriteCat(data.id)
     }
 
 }
